@@ -6,20 +6,31 @@
 
 
 int main(int argc, char ** argv) {
-	int res;
 	Matrix * A = readFromFile(argv[1]);
 	Matrix * b = readFromFile(argv[2]);
 	Matrix * x;
 
 	if (A == NULL) return -1;
 	if (b == NULL) return -2;
+	printf("Macierz A\n");
 	printToScreen(A);
+	printf("\n");
+	printf("Macierz B\n");
 	printToScreen(b);
+	printf("\n");
 
-	res = eliminate(A,b);
+	int res = eliminate(A,b);
+
+	if (res == 1) {
+    fprintf(stderr, "Błąd! Macierz jest osobliwa.\n");
+    return 1;
+	}
+
 	x = createMatrix(b->r, 1);
+
+
 	if (x != NULL) {
-		res = backsubst(x,A,b);
+		int res = backsubst(x,A,b);
 
 		printToScreen(x);
 	  freeMatrix(x);
