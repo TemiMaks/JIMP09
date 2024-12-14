@@ -5,41 +5,42 @@
 #include <stdio.h>
 
 
-int main(int argc, char ** argv) {
-	Matrix * A = readFromFile(argv[1]);
-	Matrix * b = readFromFile(argv[2]);
-	Matrix * x;
+int main(int argc, char **argv) {
+    Matrix *A = readFromFile(argv[1]);
+    Matrix *b = readFromFile(argv[2]);
+    Matrix *x;
 
-	if (A == NULL) return -1;
-	if (b == NULL) return -2;
-	printf("Macierz A\n");
-	printToScreen(A);
-	printf("\n");
-	printf("Macierz B\n");
-	printToScreen(b);
-	printf("\n");
+    if (A == NULL) return -1;
+    if (b == NULL) return -2;
+    printf("Macierz A\n");
+    printToScreen(A);
+    printf("\n");
+    printf("Macierz B\n");
+    printToScreen(b);
 
-	int res = eliminate(A,b);
+    printf("\n");
 
-	if (res == 1) {
-    fprintf(stderr, "Błąd! Macierz jest osobliwa.\n");
-    return 1;
-	}
+    int res = eliminate(A, b);
 
-	x = createMatrix(b->r, 1);
+    if (res == 1) {
+        fprintf(stderr, "Błąd! Macierz jest osobliwa.\n");
+        return 1;
+    }
+
+    x = createMatrix(b->r, 1);
 
 
-	if (x != NULL) {
-		int res = backsubst(x,A,b);
+    if (x != NULL) {
+        int res = backsubst(x, A, b);
+        printf("Macierz wyników\n");
+        printToScreen(x);
+        freeMatrix(x);
+    } else {
+        fprintf(stderr, "Błąd! Nie mogłem utworzyć wektora wynikowego x.\n");
+    }
 
-		printToScreen(x);
-	  freeMatrix(x);
-	} else {
-					fprintf(stderr,"Błąd! Nie mogłem utworzyć wektora wynikowego x.\n");
-	}
+    freeMatrix(A);
+    freeMatrix(b);
 
-	freeMatrix(A);
-	freeMatrix(b);
-
-	return 0;
+    return 0;
 }
