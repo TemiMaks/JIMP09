@@ -1,5 +1,7 @@
 # Ignorowanie katalogu bin
-bin/
+trunk/bin/
 
 # Ignorowanie katalogu obj
-obj/
+trunk/obj/
+
+*.idea
