@@ -1,0 +1,5 @@
+# Ignorowanie katalogu bin
+bin/
+
+# Ignorowanie katalogu obj
+obj/
