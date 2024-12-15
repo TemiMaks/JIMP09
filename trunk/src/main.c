@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
 
     if (x != NULL) {
         int res = backsubst(x, A, b);
-        printf("Macierz wyników\n");
+        printf("Macierz wynikow\n");
         printToScreen(x);
         freeMatrix(x);
     } else {

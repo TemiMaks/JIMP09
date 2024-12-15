@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-typedef struct _Matrix {
-    int r, c;
-    double **data;
-} Matrix;
+#include "mat_io.h"
 
 int eliminate(Matrix *A, Matrix *B) {
     if (A->r != A->c || A->r != B->r || B->c != 1) {
@@ -53,4 +49,3 @@ int eliminate(Matrix *A, Matrix *B) {
 
     return 0;
 }
-

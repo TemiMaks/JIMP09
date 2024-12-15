@@ -10,6 +10,10 @@ TARGET = $(BIN_DIR)/gauss
 SRC = $(wildcard $(SRC_DIR)/*.c)
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
+# Debug zmiennych
+$(info SRC = $(SRC))
+$(info OBJ = $(OBJ))
+
 # Domyślny cel
 all: $(TARGET)
 
@@ -25,11 +29,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Uruchomienie programu z argumentami
 run: all
-	$(TARGET) $(ARGS)
+	$(TARGET) dane/A dane/b
 
 # Czystość
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
 .PHONY: all clean run
-

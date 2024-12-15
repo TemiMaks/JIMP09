@@ -1,14 +1,18 @@
 #include <stdio.h>
 #include "backsubst.h"
-#include "matrix.h"
+/**
+ * Zwraca 0 - wsteczne podstawienie zakonczone sukcesem
+ * Zwraca 1 - błąd dzielenia przez 0 (element na diagonali = 0)
+ * Zwraca 2 - błąd nieprawidłowych rozmiarów macierzy
+ */
 
 int backsubst(Matrix *x, Matrix *A, Matrix *b) {
     // Sprawdzenie poprawności wejścia
-    if (x == NULL | | A == NULL | | b == NULL) {
+    if (x == NULL || A == NULL || b == NULL) {
         fprintf(stderr, "Błąd! Jeden z wskaźników (x, A, b) jest NULL.\n");
         return 1;
     }
-    if (A->r != A->c | | A->r != b->r | | b->c != 1 | | x->r != A->r | | x->c != 1) {
+    if (A->r != A->c || A->r != b->r || b->c != 1 || x->r != A->r || x->c != 1) {
         fprintf(stderr, "Błąd! Nieprawidłowe wymiary macierzy.\n");
         return 1;
     }
@@ -24,7 +28,7 @@ int backsubst(Matrix *x, Matrix *A, Matrix *b) {
         // Obliczenie wartości x[i]
         double sum = 0.0;
         for (int j = i + 1; j < A->c; j++) {
-            sum += A->data[i][j] * x->data[j][0];
+            sum += A->data[i][j] * x->data[j][0]; // Dodanie mnożenia
         }
         x->data[i][0] = (b->data[i][0] - sum) / A->data[i][i];
     }
